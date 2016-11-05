@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <Button
-        android:text="Calm"
+        android:text="Status"
         android:layout_width="169dp"
         android:layout_height="96dp"
         android:layout_x="91dp"
