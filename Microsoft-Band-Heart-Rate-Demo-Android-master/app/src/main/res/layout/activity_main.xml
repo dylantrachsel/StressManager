@@ -14,51 +14,45 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            android:id="@+id/btnConsent"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/consent" />
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/nameText" />
 
-        <Button
-            android:id="@+id/btnStart"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/start" />
+            android:inputType="textPersonName"
+            android:text="Age"
+            android:ems="10"
+            android:id="@+id/ageText" />
 
-        <TextView
-            android:id="@+id/txtStatus"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:height="50dp"/>
+            android:inputType="textPersonName"
+            android:text="Gender"
+            android:ems="10"
+            android:id="@+id/genderText" />
 
-        <TextView
-            android:id="@+id/txtRR"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:height="50dp" />
+            android:inputType="textPersonName"
+            android:text="Height "
+            android:ems="10"
+            android:id="@+id/heightText4" />
 
-        <TextView
-            android:id="@+id/txtTemp"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:height="50dp" />
+            android:inputType="textPersonName"
+            android:text="Weight"
+            android:ems="10"
+            android:id="@+id/weightText" />
 
-        <TextView
-            android:id="@+id/txtGsr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:height="50dp" />
-
-        <TextView
-            android:id="@+id/txtAcc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:height="50dp" />
     </LinearLayout>
 </RelativeLayout>
