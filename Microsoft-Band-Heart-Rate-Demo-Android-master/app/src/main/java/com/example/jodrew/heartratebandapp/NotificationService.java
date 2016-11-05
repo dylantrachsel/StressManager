@@ -1,40 +1,26 @@
 package com.example.jodrew.heartratebandapp;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import java.lang.Thread;
+import android.content.Context;
 
-import org.w3c.dom.Text;
+/**
+ * Created by dylantrachsel on 11/5/16.
+ */
 
-import java.lang.ref.WeakReference;
-
-public class MainActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-/*
-        NotificationService notification = new NotificationService();
-
-        notification.sendMessage("test", "test"); */
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+public class NotificationService extends Activity {
+    public void sendMessage(String notificationTitle, String notificationText) {
         Context context = this;
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_stat_name)
-                        .setContentTitle("Stress Level Alert")
-                        .setContentText("Tap this notification to begin coping acitivies");
+                        .setSmallIcon(0)
+                        .setContentTitle(notificationTitle)
+                        .setContentText(notificationText);
         int NOTIFICATION_ID = 12345;
 
         Intent targetIntent = new Intent(this, MainActivity.class);
