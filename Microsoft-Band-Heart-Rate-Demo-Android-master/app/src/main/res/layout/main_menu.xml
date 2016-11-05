@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:text="Status"
+        android:layout_width="169dp"
+        android:layout_height="96dp"
+        android:layout_x="91dp"
+        android:layout_y="60dp"
+        android:id="@+id/button"
+        android:onClick="statusClick" />
+
+    <Button
+        android:text="S"
+        android:layout_width="169dp"
+        android:layout_x="89dp"
+        android:layout_y="248dp"
+        android:id="@+id/button2"
+        android:layout_height="96dp"
+        android:onClick="sClick" />
+</AbsoluteLayout>

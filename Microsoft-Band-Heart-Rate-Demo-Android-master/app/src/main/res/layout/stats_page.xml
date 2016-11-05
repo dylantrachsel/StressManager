@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:text="Heart Rate"
+        android:layout_width="138dp"
+        android:layout_height="47dp"
+        android:layout_x="15dp"
+        android:layout_y="13dp"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="168dp"
+        android:layout_height="55dp"
+        android:layout_x="179dp"
+        android:layout_y="13dp"
+        android:id="@+id/heartRate" />
+
+    <TextView
+        android:text="RR Interval"
+        android:layout_width="107dp"
+        android:layout_height="47dp"
+        android:layout_x="13dp"
+        android:layout_y="256dp"
+        android:id="@+id/textView3" />
+
+    <TextView
+        android:text="Galvanic Skin Response"
+        android:layout_width="104dp"
+        android:layout_height="47dp"
+        android:layout_x="13dp"
+        android:layout_y="174dp"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:text="Skin Temperature"
+        android:layout_width="116dp"
+        android:layout_height="47dp"
+        android:layout_x="14dp"
+        android:layout_y="82dp"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="168dp"
+        android:layout_height="55dp"
+        android:layout_x="177dp"
+        android:layout_y="65dp"
+        android:id="@+id/skinTemp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="168dp"
+        android:layout_height="55dp"
+        android:layout_x="178dp"
+        android:layout_y="160dp"
+        android:id="@+id/galvSkin" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="168dp"
+        android:layout_height="55dp"
+        android:layout_x="174dp"
+        android:layout_y="244dp"
+        android:id="@+id/rrInterval" />
+
+    <ImageView
+        android:layout_width="352dp"
+        android:layout_height="206dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_x="17dp"
+        android:layout_y="289dp"
+        android:id="@+id/imageView" />
+</AbsoluteLayout>

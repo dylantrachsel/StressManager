@@ -1,8 +1,12 @@
 package com.example.jodrew.heartratebandapp;
 
-
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -15,7 +19,6 @@ import java.util.List;
 
 
 public class MainActivity extends Activity {
-
     private SensorData mSensorData;
     private Button mHistButton;
     private Button mStartButton;
@@ -54,10 +57,5 @@ public class MainActivity extends Activity {
 
             }
         });
-
-
-
-
     }
-
 }
