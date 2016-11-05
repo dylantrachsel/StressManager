@@ -6,16 +6,59 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import java.lang.Thread;
 
-import org.w3c.dom.Text;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-import java.lang.ref.WeakReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends Activity {
+    private SensorData mSensorData;
+    private Button mHistButton;
+    private Button mStartButton;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+<<<<<<< HEAD
+=======
+
+        setContentView(R.layout.activity_main);
+
+        mSensorData = new SensorData();
+
+        mSensorData.startHRCon(this);
+
+        mHistButton = (Button) findViewById(R.id.histButton);
+        mStartButton = (Button) findViewById(R.id.startButton);
+
+        mHistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MultiSpinner ms = (MultiSpinner)findViewById(R.id.multi_spinner);
+                List<String> list = new ArrayList<String>();
+                list.add("High Blood Pressure");
+                list.add("Diabetic");
+                ms.setItems(list);
+            }
+        });
+
+        mStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent MainMenuIntent = new Intent(getApplication(), MainMenu.class);
+                MainMenuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(MainMenuIntent);
+
+            }
+        });
+>>>>>>> 130ec7aa2c8611631bcb7367af88a325cd921cb1
     }
 }
