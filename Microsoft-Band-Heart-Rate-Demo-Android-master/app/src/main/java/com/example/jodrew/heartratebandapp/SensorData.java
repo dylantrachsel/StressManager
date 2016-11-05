@@ -1,8 +1,11 @@
 package com.example.jodrew.heartratebandapp;
 
 import android.app.Activity;
+import android.app.Application;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.microsoft.band.BandClient;
@@ -29,7 +32,7 @@ import java.lang.ref.WeakReference;
  * Created by chrisboodoo on 2016-11-05.
  */
 
-public class SensorData extends Activity{
+public class SensorData {
 
     private BandClient client = null;
 
@@ -39,9 +42,14 @@ public class SensorData extends Activity{
     private double RR_interval;
     private double Skin_temp;
 
-    private boolean Check_consent = false;
+    private HeartRateConsentThread mHRConThread;
+    private HeartRateSubscriptionThread mHRSubThread;
 
-    final WeakReference<Activity> reference = new WeakReference<Activity>(this);
+    public boolean Check_consent = false;
+
+    private String TAG = "MSBand";
+
+
 
 
     private BandHeartRateEventListener mHeartRateEventListener = new BandHeartRateEventListener() {
@@ -84,80 +92,86 @@ public class SensorData extends Activity{
 
             Gsr = event.getResistance();
             // Provides the current skin resistance of the wearer in kohms
+            Log.d(TAG,"gsr" + event.getResistance());
         }
     };
 
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-
-
-        new HeartRateConsentTask().execute(reference);
-
-        while(!Check_consent){
-
-        }
-        new HeartRateSubscriptionTask().execute();
-
-    }
 
     //Kick off the heart rate reading
-    public class HeartRateSubscriptionTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
+
+    public void startHRCon(Activity activity){
+
+        mHRConThread = new HeartRateConsentThread(activity);
+        mHRConThread.start();
+    }
+
+   /* public void startHRSub(Activity activity){
+        if (Check_consent) {
+            mHRSubThread = new HeartRateSubscriptionThread(activity);
+            mHRSubThread.start();
+        }
+
+    }*/
+
+
+
+
+    private class HeartRateSubscriptionThread extends Thread {
+        private Activity mActivity;
+
+        private HeartRateSubscriptionThread(Activity activity){
+            mActivity = activity;
+        }
+
+        public void run() {
+            Log.d(TAG, "sub thread started 2");
             try {
-                if (getConnectedBandClient()) {
+                if (getConnectedBandClient(mActivity)) {
                     if (client.getSensorManager().getCurrentHeartRateConsent() == UserConsent.GRANTED) {
                         client.getSensorManager().registerHeartRateEventListener(mHeartRateEventListener);
                         client.getSensorManager().registerRRIntervalEventListener(mBandRRIntervalEventListener);
                         client.getSensorManager().registerSkinTemperatureEventListener(mBandSkinTemperatureEventListener);
                         client.getSensorManager().registerGsrEventListener(mBandGsrEventListener);
+                        Log.d(TAG, "streaming");
                     } else {
-                        appendToUI("You have not given this application consent to access heart rate data yet."
-                                + " Please press the Heart Rate Consent button.\n");
+
                     }
                 } else {
-                    appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
                 }
             } catch (BandException e) {
-                String exceptionMessage="";
-                switch (e.getErrorType()) {
-                    case UNSUPPORTED_SDK_VERSION_ERROR:
-                        exceptionMessage = "Microsoft Health BandService doesn't support your SDK Version. Please update to latest SDK.\n";
-                        break;
-                    case SERVICE_ERROR:
-                        exceptionMessage = "Microsoft Health BandService is not available. Please make sure Microsoft Health is installed and that you have the correct permissions.\n";
-                        break;
-                    default:
-                        exceptionMessage = "Unknown error occured: " + e.getMessage() + "\n";
-                        break;
-                }
-                appendToUI(exceptionMessage);
 
             } catch (Exception e) {
-                appendToUI(e.getMessage());
             }
-            return null;
         }
     }
 
     //Need to get user consent
-    private class HeartRateConsentTask extends AsyncTask<WeakReference<Activity>, Void, Void> {
-        @Override
-        protected Void doInBackground(WeakReference<Activity>... params) {
-            try {
-                if (getConnectedBandClient()) {
 
-                    if (params[0].get() != null) {
-                        client.getSensorManager().requestHeartRateConsent(params[0].get(), new HeartRateConsentListener() {
+    public class HeartRateConsentThread extends Thread{
+        private Activity mActivity;
+
+        public HeartRateConsentThread(Activity activity){
+            mActivity = activity;
+        }
+
+        public void run(){
+            try {
+                if (getConnectedBandClient(mActivity)) {
+
+                    if (client != null) {
+                        client.getSensorManager().requestHeartRateConsent(mActivity, new HeartRateConsentListener() {
                             @Override
                             public void userAccepted(boolean consentGiven) {
                                 Check_consent = true;
+                                Log.d(TAG, "consented");
+                                mHRSubThread = new HeartRateSubscriptionThread(mActivity);
+                                mHRSubThread.start();
+                                Log.d(TAG, "sub thread started 1");
                             }
                         });
                     }
                 } else {
-                    appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
+                    //appendToUI("Band isn't connected. Please make sure bluetooth is on and the band is in range.\n");
                 }
             } catch (BandException e) {
                 String exceptionMessage="";
@@ -172,18 +186,16 @@ public class SensorData extends Activity{
                         exceptionMessage = "Unknown error occured: " + e.getMessage() + "\n";
                         break;
                 }
-                appendToUI(exceptionMessage);
+                //appendToUI(exceptionMessage);
 
             } catch (Exception e) {
-                appendToUI(e.getMessage());
+                //appendToUI(e.getMessage());
             }
-            return null;
         }
     }
 
-
     //Get connection to band
-    private boolean getConnectedBandClient() throws InterruptedException, BandException {
+    public boolean getConnectedBandClient(Activity activity) throws InterruptedException, BandException {
 
         if (client == null) {
             //Find paired bands
@@ -193,7 +205,7 @@ public class SensorData extends Activity{
                 return false;
             }
             //need to set client if there are devices
-            client = BandClientManager.getInstance().create(getBaseContext(), devices[0]);
+            client = BandClientManager.getInstance().create(activity, devices[0]);
         } else if(ConnectionState.CONNECTED == client.getConnectionState()) {
             return true;
         }
@@ -202,9 +214,6 @@ public class SensorData extends Activity{
         return ConnectionState.CONNECTED == client.connect().await();
     }
 
-    private void appendToUI(String string){
-        Toast.makeText(getApplicationContext(), string, Toast.LENGTH_SHORT).show();
-    }
 
     public int getHR(){
         return HR;

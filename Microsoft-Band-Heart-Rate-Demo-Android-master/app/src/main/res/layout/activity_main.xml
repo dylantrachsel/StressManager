@@ -18,41 +18,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Name"
             android:ems="10"
-            android:id="@+id/nameText" />
+            android:id="@+id/nameText"
+            android:hint="Name" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Age"
             android:ems="10"
-            android:id="@+id/ageText" />
+            android:id="@+id/ageText"
+            android:hint="Age" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Gender"
             android:ems="10"
-            android:id="@+id/genderText" />
+            android:id="@+id/genderText"
+            android:hint="Gender" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Height "
             android:ems="10"
-            android:id="@+id/heightText4" />
+            android:id="@+id/heightText"
+            android:hint="Height" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Weight"
             android:ems="10"
-            android:id="@+id/weightText" />
+            android:id="@+id/weightText"
+            android:hint="Weight" />
+
+        <Button
+            android:text="Medical History"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/histButton" />
+
+        <Button
+            android:text="DONE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/startButton" />
 
     </LinearLayout>
 </RelativeLayout>
