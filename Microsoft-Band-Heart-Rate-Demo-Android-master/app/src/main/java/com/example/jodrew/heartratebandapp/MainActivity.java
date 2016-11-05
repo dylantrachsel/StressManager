@@ -13,22 +13,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainActivity extends Activity {
     private SensorData mSensorData;
     private Button mHistButton;
     private Button mStartButton;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-=======
 
         setContentView(R.layout.activity_main);
 
@@ -56,9 +51,7 @@ public class MainActivity extends Activity {
                 Intent MainMenuIntent = new Intent(getApplication(), MainMenu.class);
                 MainMenuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getApplication().startActivity(MainMenuIntent);
-
             }
         });
->>>>>>> 130ec7aa2c8611631bcb7367af88a325cd921cb1
     }
 }

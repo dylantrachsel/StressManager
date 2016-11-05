@@ -24,7 +24,15 @@
         </activity>
 
         <activity android:name=".MainMenu">
+        </activity>
 
+        <activity android:name=".PastBreakdown">
+        </activity>
+
+        <activity android:name=".StatsPage">
+        </activity>
+
+        <activity android:name=".InterventionPage">
         </activity>
 
 

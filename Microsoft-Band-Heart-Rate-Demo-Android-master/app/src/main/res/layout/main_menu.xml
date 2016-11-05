@@ -8,15 +8,13 @@
         android:layout_height="96dp"
         android:layout_x="91dp"
         android:layout_y="60dp"
-        android:id="@+id/button"
-        android:onClick="statusClick" />
+        android:id="@+id/statusButton" />
 
     <Button
         android:text="S"
         android:layout_width="169dp"
-        android:layout_x="89dp"
-        android:layout_y="248dp"
-        android:id="@+id/button2"
-        android:layout_height="96dp"
-        android:onClick="sClick" />
+        android:layout_x="92dp"
+        android:layout_y="245dp"
+        android:id="@+id/sButton"
+        android:layout_height="96dp" />
 </AbsoluteLayout>
