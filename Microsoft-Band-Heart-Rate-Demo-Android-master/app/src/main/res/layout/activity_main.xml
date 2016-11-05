@@ -55,16 +55,22 @@
             android:hint="Weight" />
 
         <Button
-            android:text="Medical History"
+            android:text="Add Medical History"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/histButton" />
 
-        <Button
-            android:text="DONE"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/startButton" />
+            android:layout_height="match_parent">
+
+            <Button
+                android:text="DONE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/startButton" />
+        </LinearLayout>
 
     </LinearLayout>
 </RelativeLayout>

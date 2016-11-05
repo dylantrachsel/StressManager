@@ -37,23 +37,23 @@ public class MainActivity extends Activity {
         mHistButton = (Button) findViewById(R.id.histButton);
         mStartButton = (Button) findViewById(R.id.startButton);
 
-        //MultiSpinner ms = (MultiSpinner) findViewById(R.id.multi_spinner);
-        Spinner ms = (Spinner)findViewById(R.id.multi_spinner);
-        List<String> list = new ArrayList<String>();
-        list.add("High Blood Pressure");
-        list.add("Diabetic");
-
-
         mHistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MultiSpinner ms = (MultiSpinner)findViewById(R.id.multi_spinner);
+                List<String> list = new ArrayList<String>();
+                list.add("High Blood Pressure");
+                list.add("Diabetic");
+                ms.setItems(list);
             }
         });
 
         mStartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent MainMenuIntent = new Intent(getApplication(), MainMenu.class);
+                MainMenuIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplication().startActivity(MainMenuIntent);
 
             }
         });
